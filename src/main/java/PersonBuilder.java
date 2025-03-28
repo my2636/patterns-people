@@ -4,6 +4,7 @@ public class PersonBuilder {
     protected int age;
     protected String city;
 
+
     /*
     Также надо создать класс PersonBuilder для конструирования объектов класса Person.
     - Объекту этого класса (далее - билдер) можно выставлять любые данные для будущего объекта класса Person через методы
@@ -28,35 +29,38 @@ public class PersonBuilder {
     * */
 
 
-
     public PersonBuilder setName(String name) {
-        this.age = age;
+        this.name = name;
         return this;
     }
+
     public PersonBuilder setSurname(String surname) {
         this.surname = surname;
         return this;
     }
+
     public PersonBuilder setAge(int age) throws IllegalAccessException {
         if (age < 0) {
-            throw new IllegalAccessException("Возраст не может быть отрицательным");
+            throw new IllegalArgumentException("Возраст не может быть отрицательным");
         } else {
             this.age = age;
             return this;
         }
     }
 
-    public PersonBuilder setAddress(String address) {
+    public PersonBuilder setAddress(String city) {
         this.city = city;
         return this;
     }
 
-    public Person build() throws IllegalAccessException {
-        if (name == null || surname == null) {
-            throw new IllegalArgumentException("Имя или Фамилия не может быть пустым");
+    public Person build() throws IllegalStateException, IllegalAccessException {
+        if (name == null) {
+            throw new IllegalStateException("Поле Имя не может быть пустым");
+        }
+        if (surname == null) {
+            throw new IllegalStateException("Поле Фамилия не может быть пустым");
         }
 
         return new Person(this);
     }
-        
 }

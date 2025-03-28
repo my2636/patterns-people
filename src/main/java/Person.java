@@ -1,4 +1,5 @@
 import java.util.Objects;
+import java.util.Random;
 
 public class Person {
     protected final String name;
@@ -47,6 +48,13 @@ public class Person {
         }
     }
 
+    public PersonBuilder newChildBuilder() throws IllegalAccessException {
+        return new PersonBuilder()
+                .setSurname(this.surname)
+                .setAge(new Random().nextInt(this.age - 18))
+                .setAddress(this.city);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -58,4 +66,9 @@ public class Person {
     public int hashCode() {
         return Objects.hash(name, surname, age, city);
     }
+
+    public String toString() {
+        return "Имя: " + this.name + " " + "Фамилия: " + this.surname + " ";
+    }
+
 }
