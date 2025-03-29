@@ -8,24 +8,34 @@ public class PersonBuilderTest {
     void buildValidTest() throws IllegalAccessException {
 
         // when
-        Person person = new PersonBuilder()
+        Person mom = new PersonBuilder()
                 .setName("Евгения")
-                .setSurname("Иванова")
+                .setSurname("Иванов(a)")
                 .setAge(40)
                 .setAddress("Гусь-Хрустальный")
                 .build();
 
+        Person son = mom.newChildBuilder()
+                .setName("Николай")
+                        .build();
+
         //then
-        assertEquals("Евгения", person.getName());
-        assertEquals("Иванова", person.getSurname());
-        assertEquals(40, person.getAge());
-        assertEquals("Гусь-Хрустальный", person.getAddress());
+        assertEquals("Евгения", mom.getName());
+        assertEquals("Иванов(a)", mom.getSurname());
+        assertEquals(40, mom.getAge());
+        assertEquals("Гусь-Хрустальный", mom.getAddress());
+
+        assertEquals("Николай", son.getName());
+        assertEquals("Иванов(a)", son.getSurname());
+        assertTrue(son.getAge() <= mom.getAge() - 18);
+        assertEquals("Гусь-Хрустальный", son.getAddress());
 
     }
 
     @Test
     void throwsExceptions() {
-        assertThrows(IllegalStateException.class, () -> new PersonBuilder().build());
+        assertThrows(IllegalStateException.class, () -> new PersonBuilder().setName("Евгения").build());
+        assertThrows(IllegalStateException.class, () -> new PersonBuilder().setSurname("Евгения").build());
         assertThrows(IllegalArgumentException.class, () -> new PersonBuilder().setAge(-20));
     }
 

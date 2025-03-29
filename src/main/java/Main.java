@@ -11,7 +11,18 @@ public class Main {
                 .build();
         System.out.println("У " + mom + " есть сын, " + son);
 
-        try {
+        System.out.println(mom.getAge());
+        System.out.println(son.getAge());
+        System.out.println(mom.getAddress());
+        System.out.println();
+        System.out.println(son.getAddress());
+        System.out.println(son.city);
+        son.setAddress("JKL");
+        System.out.println("111" + son.getAddress());
+        System.out.println(son.city);
+
+
+/*        try {
             // Не хватает обяхательных полей
             new PersonBuilder().build();
         } catch (IllegalStateException e) {
@@ -23,6 +34,6 @@ public class Main {
             new PersonBuilder().setAge(-100).build();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
