@@ -3,6 +3,8 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 public class Person {
     protected final String name;
     protected final String surname;
@@ -40,8 +42,8 @@ public class Person {
         return surname;
     }
 
-    public int getAge() {
-        return age.orElse(0);
+    public OptionalInt getAge() {
+        return age;
     }
 
     String getAddress() {
@@ -61,7 +63,7 @@ public class Person {
     public PersonBuilder newChildBuilder() throws IllegalAccessException {
         return new PersonBuilder()
                 .setSurname(this.surname)
-                .setAge(this.age.isPresent() ? new Random().nextInt(this.age.getAsInt() - 18) : 0)
+                .setAge(this.age.isPresent() ? new Random().nextInt(abs(this.age.getAsInt() - 18)) : 0)
                 .setAddress(this.city.orElse(null));
     }
 
@@ -81,7 +83,7 @@ public class Person {
     }
 
     public String toString() {
-        return "Имя: " + this.name + " " + "Фамилия: " + this.surname + " ";
+        return " " + this.name + " " + this.surname + " ";
     }
 
 }
