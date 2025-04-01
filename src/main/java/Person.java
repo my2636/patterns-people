@@ -61,20 +61,15 @@ public class Person {
     }
 
     public PersonBuilder newChildBuilder() throws IllegalAccessException {
-        return new PersonBuilder()
-                .setSurname(this.surname)
-                .setAge(this.age.isPresent() ? new Random().nextInt(abs(this.age.getAsInt() - 18)) : 0)
-                .setAddress(this.city.orElse(null));
+        return new PersonBuilder().setSurname(this.surname).setAge(this.age.isPresent() ?
+                new Random().nextInt(abs(this.age.getAsInt() - 18)) : 0).setAddress(this.city.orElse(null));
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return age == person.age &&
-                Objects.equals(name, person.name) &&
-                Objects.equals(surname, person.surname) &&
-                Objects.equals(city, person.city);
+        return age == person.age && Objects.equals(name, person.name) && Objects.equals(surname, person.surname) && Objects.equals(city, person.city);
     }
 
     @Override
