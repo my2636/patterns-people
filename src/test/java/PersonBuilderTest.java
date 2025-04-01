@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.OptionalInt;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PersonBuilderTest {
@@ -17,17 +19,17 @@ public class PersonBuilderTest {
 
         Person son = mom.newChildBuilder()
                 .setName("Николай")
-                        .build();
+                .build();
 
         //then
         assertEquals("Евгения", mom.getName());
         assertEquals("Иванов(a)", mom.getSurname());
-        assertEquals(40, mom.getAge());
+        assertEquals(OptionalInt.of(40), mom.getAge());
         assertEquals("Гусь-Хрустальный", mom.getAddress());
 
         assertEquals("Николай", son.getName());
         assertEquals("Иванов(a)", son.getSurname());
-        assertTrue(son.getAge() <= mom.getAge() - 18);
+        assertTrue(son.getAge().getAsInt() <= mom.getAge().getAsInt() - 18);
         assertEquals("Гусь-Хрустальный", son.getAddress());
 
     }

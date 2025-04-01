@@ -1,5 +1,3 @@
-import java.util.OptionalInt;
-
 public class PersonBuilder {
     protected String name;
     protected String surname;
